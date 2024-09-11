@@ -90,8 +90,9 @@
         </div>
     </div>
     @push('script')
-        <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
-        <script>
+            <script src="{{asset('panel/assets/js/ckeditor.js')}}"></script>
+
+            <script>
             ClassicEditor
                 .create(document.querySelector('#editor'), {
                     language: 'fa',

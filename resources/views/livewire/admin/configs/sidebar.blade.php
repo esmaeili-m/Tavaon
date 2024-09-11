@@ -9,55 +9,61 @@
                             <img src="assets/images/usrbig.jpg" alt="profile">
                         </div>
                         <div class="profile-info">
-                            <h3>حسین حیاتی</h3>
+                            <h3>{{auth()->user()->name}}</h3>
                             <p>خوش آمدید !</p>
                         </div>
                     </div>
                 </li>
                 <li class="header">-- اصلی</li>
-                <li class="active">
-                    <a href="#" onClick="return false;" class="menu-toggle">
-                        <i class="menu-icon ti-home"></i>
-                        <span>خانه</span>
+                <li class="{{request()->routeIs('dashboard') ? 'active active-bg' : ''}}">
+                    <a href="{{route('dashboard')}}">
+                        <i class="menu-icon ti-bar-chart"></i>
+                        <span>داشبورد</span>
                     </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="index.html">داشبورد 1</a>
-                        </li>
-                        <li>
-                            <a href="pages/dashboard/dashboard2.html">داشبورد 2</a>
-                        </li>
-                        <li>
-                            <a href="pages/dashboard/dashboard3.html">داشبورد 3</a>
-                        </li>
-                    </ul>
                 </li>
-
-                <li>
+                <li class="{{request()->routeIs('user.*') ? 'active active-bg' : ''}}">
                     <a href="{{route('user.list')}}">
                         <i class="menu-icon ti-user"></i>
                         <span>کاربران</span>
                     </a>
                 </li>
-                <li>
+                <li class="{{request()->routeIs('post.*') ? 'active active-bg' : ''}}">
                     <a href="{{route('post.list')}}">
-                        <i class="menu-icon ti-user"></i>
+                        <i class="menu-icon ti-gallery"></i>
                         <span>پروژه ها</span>
                     </a>
                 </li>
-                <li>
+                <li class="{{request()->routeIs('event.*') ? 'active active-bg' : ''}}">
                     <a href="{{route('event.list')}}">
-                        <i class="menu-icon ti-user"></i>
+                        <i class="menu-icon ti-time"></i>
                         <span>رویداد ها</span>
                     </a>
                 </li>
-                <li>
+                <li class="{{request()->routeIs('news.*') ? 'active active-bg' : ''}}">
                     <a href="{{route('news.list')}}">
-                        <i class="menu-icon ti-user"></i>
+                        <i class="menu-icon ti-book"></i>
                         <span>اخبار</span>
                     </a>
                 </li>
-                <li class="">
+                <li class="{{request()->routeIs('chat.*') ? 'active active-bg' : ''}}">
+                    <a href="{{route('chat.list')}}">
+                        <i class="menu-icon ti-comment"></i>
+                        <span>چت</span>
+                    </a>
+                </li>
+                <li class="{{request()->routeIs('messages.*') ? 'active active-bg' : ''}}">
+                    <a href="{{route('messages.list')}}">
+                        <i class="menu-icon ti-email"></i>
+                        <span>پیام ها</span>
+                    </a>
+                </li>
+{{--                <li class="{{request()->routeIs('seo') ? 'active active-bg' : ''}}">--}}
+{{--                    <a href="{{route('seo.list')}}">--}}
+{{--                        <i class="menu-icon ti-search"></i>--}}
+{{--                        <span> سئو سایت</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+                <li class="{{request()->routeIs('slider.*') ? 'active active-bg' : ''}}" >
                     <a href="#" onClick="return false;" class="menu-toggle">
                         <i class="menu-icon ti-home"></i>
                         <span>صفحات</span>
@@ -74,12 +80,6 @@
                         </li>
                         <li>
                             <a href="{{route('history.list')}}">تاریخچه</a>
-                        </li>
-                        <li>
-                            <a href="pages/dashboard/dashboard3.html">تاریخچه</a>
-                        </li>
-                        <li>
-                            <a href="pages/dashboard/dashboard3.html">تاریخچه</a>
                         </li>
                     </ul>
                 </li>

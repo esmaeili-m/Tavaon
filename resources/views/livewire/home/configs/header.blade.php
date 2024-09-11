@@ -27,6 +27,7 @@
                                         <div class="row">
                                             <ul class="col-lg-12 link-list">
                                                 <li><a style="cursor: pointer" href="{{route('profile')}}"> پروفایل کاربری</a></li>
+                                                <li><a style="cursor: pointer" href="{{route('chat')}}">ارتباط با ادمین</a></li>
 {{--                                                <li><a style="cursor: pointer" href="{{route('user.orders')}}">سفارشات من</a></li>--}}
                                                 @if(auth()->user()->role == 3)
                                                     <li><a style="cursor: pointer" href="{{route('dashboard')}}">داشبورد</a></li>

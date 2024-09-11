@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/news/{id}',\App\Livewire\Home\NewDetails::class)->name('news.details');
     Route::get('/events/{id}',\App\Livewire\Home\EventDetail::class)->name('events.details');
     Route::get('/events/',\App\Livewire\Home\Event::class)->name('events');
+    Route::get('/chat/',\App\Livewire\Home\Chat::class)->name('chat');
     Route::get('/login',\App\Livewire\Home\login::class)->name('login');
     Route::get('/profile',\App\Livewire\Home\Profile::class)->name('profile')->middleware('auth');
 
@@ -38,6 +39,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/user/create',\App\Livewire\Admin\Users\Create::class)->name('user.create');
     Route::get('/user/update/{id}',\App\Livewire\Admin\Users\Update::class)->name('user.update');
     Route::get('/user/trash',\App\Livewire\Admin\Users\Trash::class)->name('user.trash');
+    Route::get('/user/capital/{id}',\App\Livewire\Admin\Users\Cpital::class)->name('user.capital');
 //    -----------------------------------------{{News}}----------------------------------------------------------------------
     Route::get('/news/list',\App\Livewire\Admin\News\Index::class)->name('news.list');
     Route::get('/news/create',\App\Livewire\Admin\News\Create::class)->name('news.create');
@@ -71,6 +73,12 @@ Route::prefix('admin')->group(function (){
     Route::get('/settings/queztions/list',\App\Livewire\Admin\Queztions\Index::class)->name('setting.queztions.list');
     Route::get('/settings/queztions/create',\App\Livewire\Admin\Queztions\Create::class)->name('setting.queztions.create');
     Route::get('/settings/queztions/update\{id}',\App\Livewire\Admin\Queztions\Update::class)->name('setting.queztions.update');
+//    -----------------------------------------{{Chats}}----------------------------------------------------------------------
+    Route::get('/messages/',\App\Livewire\Admin\Messages::class)->name('messages.list');
+    Route::get('/chats/',\App\Livewire\Admin\Chat\Index::class)->name('chat.list');
+    Route::get('/chats/{id}',\App\Livewire\Admin\Chat\Create::class)->name('chat.user');
+//    -----------------------------------------{{Seo}}----------------------------------------------------------------------
+//    Route::get('/seo/',\App\Livewire\Admin\Seo\Index::class)->name('seo.list');
 
 
 });
@@ -80,10 +88,10 @@ Route::prefix('admin')->group(function (){
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+//Route::middleware('auth')->group(function () {
+//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//});
 
 //require __DIR__.'/auth.php';

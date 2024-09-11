@@ -44,5 +44,10 @@
         <!-- RESPONSIVE CSS -->
         <link href="{{asset('home')}}/css/responsive.css" rel="stylesheet">
         @livewireStyles
+        <style>
+            .bg-primary-custom{
+                background-color: #5197ff;
+            }
+        </style>
     </head>
 </div>

@@ -6,19 +6,46 @@
                     <p class="p-lg">نام شما: </p>
                     <span>لطفا نام خود را وارد کنید: </span>
                     <input wire:model.lazy="name" type="text" name="name" class="form-control name message" placeholder="نام شما*" >
+                    @error('name')
+                        <div class=" alert alert-danger">
+                            این فیلد اجباری است
+                        </div>
+                    @enderror
                 </div>
                 <div  class="col-md-6">
                     <p class="p-lg">شماره همراه شما: </p>
-                    <span class="text-danger"> شماره همراه قابل تغییر نمی باشد: </span>
-                    <input style="  background-color : #d1d1d1; " disabled value="{{$phone}}" type="text" name="email" class="form-control email" placeholder="شماره همراه*">
+                    <span>لطفا شماره همراهی که به نام خود شماست را وارد کنید: </span>
+                    <input  wire:model.lazy="phone" type="text" name="email" class="form-control email" placeholder="شماره همراه*">
                     @error('phone')
-                    <div class="mt-1 alert alert-danger">
-                        {{$message}}
-                    </div>
+                        <div class=" alert alert-danger">
+                            شماره همراه معتبر نیست.
+                        </div>
+                    @enderror
+                </div>
+                <div  class="col-md-6">
+                    <p class="p-lg">ایمیل شما: </p>
+                    <span>لطفا ایمیل خود را وارد کنید: </span>
+                    <input  wire:model.lazy="email" type="text" name="email" class="form-control email" placeholder="ایمیل*">
+                    @error('email')
+                        <div class=" alert alert-danger">
+                            ایمیل معتبر نیست.
+                        </div>
+                    @enderror
+                </div>
+                <div  class="col-md-6">
+                    <p class="p-lg">رمز عبور خود را تغییر دهید: </p>
+                    <span>لطفا رمز عبور جدید خود را وارد کنید: </span>
+                    <input  wire:model.lazy="password" type="password" name="email" class="form-control email" placeholder="رمز عبور*">
+                    @error('phone')
+                        <div class=" alert alert-danger">
+                            رمز عبور باید بیش تر از 8 کاراکتر باشد.
+                        </div>
                     @enderror
                 </div>
                 <div class="col-md-12 mt-15 form-btn text-right">
-                    <button type="submit" class="btn btn-skyblue tra-grey-hover submit">ذخیره</button>
+                    <button wire:loading.remove type="submit" class="btn btn-skyblue tra-grey-hover submit">ذخیره</button>
+                    <div wire:loading class="spinner-grow text-primary" role="status">
+                    </div>
                 </div>
 
                 <!-- Contact Form Message -->
@@ -27,32 +54,40 @@
                 </div>
 
             </form>
+            <div class="pricing-compare pc-40">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="h3-sm text-center">دارایی ها و توضیحات کاربر</h4>
+                        <div class="table-responsive">
+                            <table class="table text-center">
 
+                                <thead>
+                                <tr>
+                                    <th class="text-start" style="width: 34%;">عنوان</th>
+                                    <th class="text-start" style="width: 22%;">توضیحات</th>
+                                </tr>
+                                </thead>
 
+                                <tbody>
 
-        </div>
-    </section>
-    <div wire:ignore  class="modal fade" id="order" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div  class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">تعداد نان مورد نظر را وارد کنید</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <tr>
+                                    @foreach($data ?? []  as $item)
+                                        <th scope="row" class="text-start">{{$item->title}}</th>
+                                        <td class="ico-15 green-color text-start">{{$item->value}}</td>
+                                    @endforeach
+
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>	<!-- End Table -->
+
+                    </div>
                 </div>
-                <div  class="modal-body">
-                    <form class="sigin-form">
-                        <div class="col-md-12">
-                            <input id="count" type="number" name="name" class="form-control name" placeholder="تعداد نان">
-                            <div class="d-none alert-danger alert mt-1" id="errorcount">تعداد نان مد نظر خود را وارد کنید</div>
-                        </div>
-                        <a style="padding: 12px" onclick="validatecount()" class="mt-3 btn btn-stateblue violet-hover last-link coustom-submit">ثبت</a>
-                        <a wire:click="set_order" id="set_order" class=""></a>
-                    </form>
-                </div>
-
             </div>
         </div>
-    </div>
+    </section>
+
     <script>
         function validatecount() {
             const count=document.getElementById('count').value;

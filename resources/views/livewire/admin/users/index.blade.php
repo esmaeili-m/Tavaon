@@ -59,6 +59,13 @@
                                     @endif
                                 </td>
                                 <td>
+                                    <a href="{{route('chat.user',$item->id)}}"><button class="btn tblActnBtn">
+                                            <i class="material-icons">chat</i>
+                                        </button>
+                                    </a>
+                                    <a href="{{route('user.capital',$item->id)}}"><button class="btn tblActnBtn">
+                                        <i class="material-icons">list</i>
+                                    </button></a>
                                     <a href="{{route('user.update',$item->id)}}"><button class="btn tblActnBtn">
                                         <i class="material-icons">mode_edit</i>
                                     </button></a>
