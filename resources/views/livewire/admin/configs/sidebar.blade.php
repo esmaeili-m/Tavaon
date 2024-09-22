@@ -63,22 +63,25 @@
 {{--                        <span> سئو سایت</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
-                <li class="{{request()->routeIs('slider.*') ? 'active active-bg' : ''}}" >
+                <li class="{{request()->routeIs('slider.*') ? 'active' : ''}}
+                {{request()->routeIs('history.*') ? 'active' : ''}}
+                {{request()->routeIs('staff.*') ? 'active' : ''}}
+                {{request()->routeIs('setting.*') ? 'active' : ''}}" >
                     <a href="#" onClick="return false;" class="menu-toggle">
                         <i class="menu-icon ti-home"></i>
                         <span>صفحات</span>
                     </a>
                     <ul class="ml-menu">
-                        <li >
+                        <li class="{{request()->routeIs('slider.*') ? 'active active-bg' : ''}}">
                             <a href="{{route('slider.list')}}">اسلایدر</a>
                         </li>
-                        <li>
+                        <li class="{{request()->routeIs('setting.list.*') ? 'active active-bg' : ''}}">
                             <a href="{{route('setting.list')}}">درباره ما</a>
                         </li>
-                        <li>
+                        <li class="{{request()->routeIs('setting.queztions.*') ? 'active active-bg' : ''}}">
                             <a href="{{route('setting.queztions.list')}}">سوالات متداول</a>
                         </li>
-                        <li>
+                        <li class="{{request()->routeIs('history.*') ? 'active active-bg' : ''}}">
                             <a href="{{route('history.list')}}">تاریخچه</a>
                         </li>
                     </ul>

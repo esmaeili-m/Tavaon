@@ -1,5 +1,5 @@
 <div>
-    <header id="header" class="header tra-menu navbar-{{ request()->routeIs('projects') || request()->routeIs('queztions')|| request()->routeIs('news') || request()->routeIs('events') ? 'light' : 'dark' }}">
+    <header id="header" class="header tra-menu navbar-dark">
         <div class="header-wrapper">
             <div class="wsmobileheader clearfix">
                 <span class="smllogo"><img src="{{asset('home/logo.png')}}" alt="mobile-logo"/></span>
@@ -39,7 +39,7 @@
                                     </div>
 
                                 @else
-                                    <a href="{{route('login')}}" class="btn btn-skyblue tra-grey-hover last-link">ورود</a>
+                                    <a style="color: black !important;" href="{{route('login')}}" class="btn btn-skyblue tra-grey-hover last-link">ورود</a>
                                 @endauth
                             </li>
 

@@ -41,9 +41,9 @@
                             </div>
                             <div class="blog-post-txt">
                                 <h5 class="h5-md">
-                                    <a href="{{route('projects.details',$item->id)}}">{{$item->title}} </a>
+                                    <a href="{{route('projects.details',$item->slug)}}">{{$item->title}} </a>
                                 </h5>
-                                <p class="p-lg">{{substr(strip_tags($item->description),0,50) }}</p>
+                                <p class="p-lg">{{substr(strip_tags($item->description),0,200) }}</p>
                             </div>
                         </div>
                     </div>

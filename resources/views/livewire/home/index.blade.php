@@ -123,8 +123,8 @@
                             <div class="review-1">
                                 <div id="bp-1-1" class="blog-1-post mb-40 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
                                     <div class="blog-post-img">
-                                        <div class="hover-overlay">
-                                            <img class="img-fluid" src="{{asset($item->logo)}}" alt="blog-post-image">
+                                        <div class="hover-overlay" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                                            <img style="border-radius: 5px;max-height: 200px" class="img-fluid" src="{{asset($item->logo)}}" alt="blog-post-image">
                                             <div class="item-overlay"></div>
                                         </div>
                                     </div>
@@ -132,7 +132,8 @@
                                         <h5 class="h5-md">
                                             <a href="{{route('projects.details',$item->id)}}">{{$item->title}} </a>
                                         </h5>
-                                        <p class="p-lg">{{substr(str_replace('nbsp;&','',strip_tags($item->description)),0,50) }}</p>
+                                        <p style="font-size: 15px;" class="p-lg">{{ substr(str_replace('&nbsp;', ' ', html_entity_decode(strip_tags($item->description))), 0, 200) }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -163,16 +164,17 @@
                     <div class="col">
                         <div id="bp-1-1" class="blog-1-post mb-40 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
                             <div class="blog-post-img">
-                                <div class="hover-overlay">
-                                    <img class="img-fluid" src="{{asset($item->logo)}}" alt="blog-post-image">
-                                    <div class="item-overlay"></div>
+                                <div class="hover-overlay" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                                        <img style="border-radius: 10px;" class="img-fluid" src="{{asset($item->logo ?? 'panel/assets/images/news.jpg')}}" alt="blog-post-image">
+                                        <div class="item-overlay"></div>
                                 </div>
                             </div>
                             <div class="blog-post-txt">
                                 <h5 class="h5-md">
                                     <a href="{{route('news.details',$item->id)}}">{{$item->title}} </a>
                                 </h5>
-                                <p class="p-lg">{{substr(str_replace('nbsp;&','',strip_tags($item->description)),0,50) }}</p>
+                                <p style="font-size: 15px;"  class="p-lg">{{ substr(str_replace('&nbsp;', ' ', html_entity_decode(strip_tags($item->description))), 0, 200) }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -195,8 +197,8 @@
                     <div class="col">
                         <div id="bp-1-1" class="blog-1-post mb-40 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
                             <div class="blog-post-img">
-                                <div class="hover-overlay">
-                                    <img class="img-fluid" src="{{asset($item->logo)}}" alt="blog-post-image">
+                                <div class="hover-overlay" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                                    <img style="border-radius: 5px" class="img-fluid" src="{{asset($item->logo ?? 'panel/assets/images/33630.jpg')}}" alt="blog-post-image">
                                     <div class="item-overlay"></div>
                                 </div>
                             </div>

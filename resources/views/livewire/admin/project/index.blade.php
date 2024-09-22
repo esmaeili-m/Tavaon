@@ -5,7 +5,7 @@
                 <div class="header">
                     <h2>لیست پروژه ها</h2>
                     <a href="{{route('post.create')}}">
-                        <button class="btn btn-info btn-border-radius waves-effect mx-2 me-0 mt-5">افزودن پروژه ها</button>
+                        <button class="btn btn-info btn-border-radius waves-effect mx-2 me-0 mt-5">افزودن پروژه</button>
                     </a>
                     <a href="{{route('post.trash')}}">
                         <button class="btn btn-info btn-border-radius waves-effect mx-0 me-0 mt-5">پروژه ها های حذف شده ( {{\App\Models\Post::onlyTrashed()->count()}} )</button>

@@ -10,7 +10,7 @@ use Livewire\WithFileUploads;
 class Update extends Component
 {
     use WithFileUploads;
-    public $title,$description,$logo,$slider;
+    public $title,$description,$logo,$slider,$color;
     public function UpdatedLogo()
     {
         $this->logo=uploadFile($this->logo,'Post');
@@ -20,6 +20,7 @@ class Update extends Component
     {
         $this->slider=Slider::find($id);
         $this->title=$this->slider->title;
+        $this->color=$this->slider->color;
         $this->description=$this->slider->description;
         $this->logo=$this->slider->image;
     }
@@ -42,6 +43,7 @@ class Update extends Component
             'title'=>$this->title,
             'description'=>$this->description,
             'image'=> $this->logo,
+            'color'=>$this->color ?? '#ffffff',
         ]);
         session()->flash('alert', 'اسلایدر با موفقیت اپدیت شد');
         return redirect()->route('slider.list');

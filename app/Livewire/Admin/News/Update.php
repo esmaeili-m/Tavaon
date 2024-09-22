@@ -10,42 +10,53 @@ use Livewire\WithFileUploads;
 class Update extends Component
 {
     use WithFileUploads;
-    public $title,$description,$news,$logo;
+    public $title,$description,$news,$image,$slug;
 
-    public function UpdatedLogo()
-    {
-        $this->logo=uploadFile($this->logo,'News');
 
-    }
     public function mount($id)
     {
         $this->news=News::find($id);
         $this->title=$this->news->title;
         $this->description=$this->news->description;
-        $this->logo=$this->news->logo;
+        $this->slug=$this->news->slug;
+        $this->image=$this->news->logo;
     }
     public function save(){
         Validator::validate(
             [
                 'title' => $this->title,
+                'slug' => $this->slug,
 
             ],
             [
                 'title' => 'required',
+                'slug' => 'required',
 
             ],
             [
                 'title.required' => 'این فیلد الزامی می باشد',
+                'slug.required' => 'این فیلد الزامی می باشد',
 
             ],
         );
         $this->news->update([
             'title'=>$this->title,
+            'slug'=>$this->slug,
             'description'=>$this->description,
-            'logo'=>$this->logo,
+            'logo'=>$this->image,
         ]);
         session()->flash('alert', 'خبر با موفقیت ویرایش شد');
         return redirect()->route('news.list');
+    }
+    public function UpdatedImage()
+    {
+        $this->image=uploadFile($this->image,'News');
+        return $this->image;
+    }
+    public function UpdatedSlug()
+    {
+        $this->slug=str_replace(' ','-',$this->slug);
+        return $this->slug;
     }
     public function render()
     {

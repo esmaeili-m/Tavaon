@@ -24,7 +24,7 @@ class Create extends Component
         if (!empty($this->newMessage)) {
             if ($this->update_message){
                 $this->last_chat->update([
-                    'message'=>$this->newMessage
+                    'message'=>filter_var($this->newMessage, FILTER_SANITIZE_STRING)
                 ]);
             }else{
                 Chats::create([

@@ -16,12 +16,12 @@ class Chat extends Component
         if (!empty($this->newMessage)) {
             if ($this->update_message){
                 $this->last_chat->update([
-                   'message'=>$this->newMessage
+                   'message'=>filter_var($this->newMessage, FILTER_SANITIZE_STRING)
                 ]);
             }else{
                 Chats::create([
                     'user_id'=>auth()->user()->id,
-                    'message'=>$this->newMessage,
+                    'message'=>filter_var($this->newMessage, FILTER_SANITIZE_STRING),
                 ]);
             }
 

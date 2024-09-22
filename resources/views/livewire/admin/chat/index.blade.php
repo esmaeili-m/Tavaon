@@ -24,7 +24,7 @@
                                 <th scope="row">{{$counter}}</th>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->latestChat->message}}</td>
-                                <td>{{$item->latestChat->created_at}}</td>
+                                <td>{{verta($item->latestChat->created_at)->format('H:i:s Y-m-d')}}</td>
                                 <td>
                                     <a href="{{route('chat.user',$item->id)}}"><button class="btn tblActnBtn">
                                             <i class="material-icons">chat</i>

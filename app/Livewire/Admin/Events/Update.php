@@ -10,47 +10,57 @@ use Livewire\WithFileUploads;
 class Update extends Component
 {
     use WithFileUploads;
-    public $title,$description,$time,$event,$logo;
+    public $title,$description,$time,$event,$image,$slug;
 
-    public function UpdatedLogo()
-    {
-        $this->logo=uploadFile($this->logo,'News');
-
-    }
     public function mount($id)
     {
         $this->event=Events::find($id);
         $this->title=$this->event->title;
+        $this->slug=$this->event->slug;
         $this->time=$this->event->time;
         $this->description=$this->event->description;
-        $this->logo=$this->event->logo;
+        $this->image=$this->event->logo;
     }
     public function save(){
         Validator::validate(
             [
                 'title' => $this->title,
                 'time' => $this->time,
+                'slug' => $this->time,
 
             ],
             [
                 'title' => 'required',
                 'time' => 'required',
+                'slug' => 'required',
 
             ],
             [
                 'title.required' => 'این فیلد الزامی می باشد',
                 'time.required' => 'این فیلد الزامی می باشد',
+                'slug.required' => 'این فیلد الزامی می باشد',
 
             ],
         );;
         $this->event->update([
             'title'=>$this->title,
             'time'=>$this->time,
+            'slug'=>$this->slug,
             'description'=>$this->description,
-            'logo'=>$this->logo,
+            'logo'=>$this->image,
         ]);
-        session()->flash('alert', 'خبر با موفقیت ایجاد شد');
-        return redirect()->route('news.list');
+        session()->flash('alert', 'رویداد با موفقیت ایجاد شد');
+        return redirect()->route('event.list');
+    }
+    public function UpdatedImage()
+    {
+        $this->image=uploadFile($this->image,'events');
+        return $this->image;
+    }
+    public function UpdatedSlug()
+    {
+        $this->slug=str_replace(' ','-',$this->slug);
+        return $this->slug;
     }
     public function render()
     {

@@ -35,15 +35,15 @@
                         <div id="bp-1-1" class="blog-1-post mb-40 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
                             <div class="blog-post-img">
                                 <div class="hover-overlay">
-                                    <img class="img-fluid" src="{{asset($item->logo)}}" alt="blog-post-image">
+                                    <img class="img-fluid" src="{{asset($item->logo ?? 'panel/assets/images/news.jpg')}}" alt="blog-post-image">
                                     <div class="item-overlay"></div>
                                 </div>
                             </div>
                             <div class="blog-post-txt">
                                 <h5 class="h5-md">
-                                    <a href="{{route('news.details',$item->id)}}">{{$item->title}} </a>
+                                    <a href="{{route('news.details',$item->slug)}}">{{$item->title}} </a>
                                 </h5>
-                                <p class="p-lg">{{substr(str_replace('nbsp;&','',strip_tags($item->description)),0,50) }}</p>
+                                <p class="p-lg">{{substr(str_replace('nbsp;&','',strip_tags($item->description)),0,200) }}</p>
                             </div>
                         </div>
                     </div>

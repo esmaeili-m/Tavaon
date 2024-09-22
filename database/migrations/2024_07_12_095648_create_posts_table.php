@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->bigInteger('order')->default(0);
             $table->boolean('status')->default(1);
             $table->text('logo')->nullable();

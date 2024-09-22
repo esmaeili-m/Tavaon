@@ -38,6 +38,19 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">رنگ متن</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input wire:model.defer="color" type="text" class="form-control" placeholder="رنگ متن اسلایدر را وارد کنید">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                 <label for="email_address_2">توضیحات اسلایدر</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
@@ -82,8 +95,10 @@
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5">
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <input type="checkbox" id="remember_me_4" class="filled-in">
-                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">ثبت اطلاعات</button>
+                                <button wire:loading.remove type="submit" class="btn btn-primary m-t-15 waves-effect">ثبت اطلاعات</button>
+                                <div wire:loading class="spinner-grow text-primary" style="width: 3rem; height: 3rem;"
+                                     role="status">
+                                </div>
                             </div>
                         </div>
                     </form>

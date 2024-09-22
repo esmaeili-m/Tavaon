@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->string('time');
             $table->bigInteger('order')->default(0);
             $table->boolean('status')->default(1);

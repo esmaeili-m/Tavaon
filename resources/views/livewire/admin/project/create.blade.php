@@ -38,6 +38,23 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">لینک پروژه</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input wire:model.lazy="slug" type="text" class="form-control" placeholder="لینک پروژه را وارد کنید">
+                                        @error('slug')
+                                            <div class="alert alert-danger mt-1">
+                                                {{$message}}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                 <label for="email_address_2">توضیحات پروژه</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
@@ -63,17 +80,15 @@
                                         <div class="file-field input-field">
                                             <div class="btn">
                                                 <span>فایل</span>
-                                                <input wire:model.lazy="logo" type="file">
+                                                <input wire:model.lazy="image" type="file">
                                             </div>
                                             <div class="file-path-wrapper">
-                                                <input wire:model.lazy="logo" class="file-path validate" type="text">
+                                                <input wire:model.lazy="image" class="file-path validate" type="text">
                                             </div>
                                         </div>
-                                        @error('logo')
-                                        <div class="alert alert-danger mt-1">
-                                            {{$message}}
-                                        </div>
-                                        @enderror
+                                        @if($image)
+                                            <img style="border-radius: 5px" src="{{asset($image)}}" width="100px" height="100px">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -82,8 +97,11 @@
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5">
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <input type="checkbox" id="remember_me_4" class="filled-in">
-                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">ثبت اطلاعات</button>
+                                <button wire:loading.remove type="submit" class="btn btn-primary m-t-15 waves-effect">ثبت اطلاعات</button>
+
+                                <div wire:loading class="spinner-grow text-primary" style="width: 3rem; height: 3rem;"
+                                     role="status">
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -92,27 +110,50 @@
         </div>
     </div>
     @push('script')
-        <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
-        <script>
-            ClassicEditor
-                .create(document.querySelector('#editor'), {
-                    language: 'fa',
-                    ckfinder: {
-                        uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token(), 'type' => 'news']) }}",
-                        headers: {
-                            'X-File-Type': 'news'
+            <script src="{{asset('panel/assets/js/tinymce.min.js')}}" referrerpolicy="origin"></script>
+            <script>
+                tinymce.init({
+                    menubar: false,
+                    language:'fa',
+                    statusbar: false,
+                    selector: 'textarea',
+                    plugins: 'autolink autosave save directionality code fullscreen link media codesample charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount charmap emoticons accordion image imagetools',
+                    toolbar: "undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image rtl ltr",
+                    image_title: true,
+                    automatic_uploads: true,
+                    images_upload_url: '/dashboard/upload-image-tinymce', // مسیر آپلود تصویر
+                    file_picker_types: 'image',
+                    file_picker_callback: function (callback, value, meta) {
+                        if (meta.filetype === 'image') {
+                            var input = document.createElement('input');
+                            input.setAttribute('type', 'file');
+                            input.setAttribute('accept', 'image/*');
+                            input.onchange = function () {
+                                var file = this.files[0];
+                                var reader = new FileReader();
+                                reader.onload = function () {
+                                    var id = 'blobid' + (new Date()).getTime();
+                                    var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                                    var base64 = reader.result.split(',')[1];
+                                    var blobInfo = blobCache.create(id, file, base64);
+                                    blobCache.add(blobInfo);
+
+                                    callback(blobInfo.blobUri(), { title: file.name });
+                                };
+                                reader.readAsDataURL(file);
+                            };
+
+                            input.click();
                         }
+                    },
+                    setup: function (editor) {
+                        editor.on('change', function () {
+                            editor.save();
+                        @this.set('description',editor.getContent(),false)
+                        });
                     }
-                })
-                .then(editor => {
-                    editor.model.document.on('change:data', () => {
-                    @this.set('description', editor.getData());
-                    });
-                })
-                .catch(error => {
-                    console.error(error);
                 });
-        </script>
+            </script>
         <script src="{{asset('panel')}}/assets/js/bundles/multiselect/js/jquery.multi-select.js"></script>
         <script src="{{asset('panel')}}/assets/js/bundles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
         <script src="{{asset('panel')}}/assets/js/pages/forms/advanced-form-elements.js"></script>
